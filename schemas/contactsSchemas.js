@@ -1,13 +1,15 @@
 import Joi from "joi";
+import {
+  phoneValidationErrMessage,
+  phoneValidationPattern,
+} from "../constants/contacts.js";
 
 const string = () => Joi.string();
 const email = () => string().email();
 const phone = () =>
-  string()
-    .regex(/^\(\d{3}\) \d{3}-\d{4}$/)
-    .messages({
-      "string.pattern.base": 'Phone number must of a format "(xxx) xxx-xxxx"',
-    });
+  string().regex(phoneValidationPattern).messages({
+    "string.pattern.base": phoneValidationErrMessage,
+  });
 
 export const createContactSchema = Joi.object({
   name: string().required(),
@@ -22,3 +24,7 @@ export const updateContactSchema = Joi.object({
 })
   .min(1)
   .messages({ "object.min": "Body must have at least one field" });
+
+export const updateContactFavoriteSchema = Joi.object({
+  favorite: Joi.boolean().required(),
+});

@@ -6,7 +6,7 @@ export const getAllContacts = async (req, res) => {
   res.json(contacts);
 };
 
-export const getOneContact = async (req, res, next) => {
+export const getOneContact = async (req, res) => {
   const { id } = req.params;
 
   const contact = await contactsService.getContactById(id);
@@ -29,9 +29,9 @@ export const deleteContact = async (req, res) => {
 };
 
 export const createContact = async (req, res) => {
-  const { name, email, phone } = req.body;
+  const data = req.body;
 
-  const contact = await contactsService.addContact(name, email, phone);
+  const contact = await contactsService.addContact(data);
 
   res.status(201).json(contact);
 };
