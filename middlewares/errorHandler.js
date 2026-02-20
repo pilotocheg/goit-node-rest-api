@@ -1,7 +1,9 @@
-import { ValidationError } from "sequelize";
+import { ValidationError, UniqueConstraintError } from "sequelize";
 
 const errorHandler = (err, req, res, next) => {
-  if (err instanceof ValidationError) {
+  if (err instanceof UniqueConstraintError) {
+    err.status = 409;
+  } else if (err instanceof ValidationError) {
     err.status = 400;
   }
 

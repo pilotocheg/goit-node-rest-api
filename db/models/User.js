@@ -15,7 +15,7 @@ const User = sequelize.define("user", {
     allowNull: false,
     unique: {
       args: true,
-      msg: "The email already taken",
+      msg: "Email in use",
     },
     validate: {
       is: {
@@ -36,6 +36,6 @@ const User = sequelize.define("user", {
 });
 
 // uncomment to sync if the model above was updated
-// User.sync({ alter: true });
+// User.sync({ force: true });
 
 export default User;
