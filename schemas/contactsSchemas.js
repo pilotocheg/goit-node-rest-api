@@ -1,15 +1,6 @@
 import Joi from "joi";
-import {
-  phoneValidationErrMessage,
-  phoneValidationPattern,
-} from "../constants/contacts.js";
 
-const string = () => Joi.string();
-const email = () => string().email();
-const phone = () =>
-  string().regex(phoneValidationPattern).messages({
-    "string.pattern.base": phoneValidationErrMessage,
-  });
+import { email, phone, string } from "./types.js";
 
 export const createContactSchema = Joi.object({
   name: string().required(),

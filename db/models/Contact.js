@@ -1,9 +1,11 @@
 import { DataTypes } from "sequelize";
 import sequelize from "../sequelize.js";
 import {
+  emailValidationErrMessage,
+  emailValidationPattern,
   phoneValidationErrMessage,
   phoneValidationPattern,
-} from "../../constants/contacts.js";
+} from "../../constants/validation.js";
 
 const Contact = sequelize.define("contact", {
   name: {
@@ -14,7 +16,10 @@ const Contact = sequelize.define("contact", {
     type: DataTypes.STRING,
     allowNull: false,
     validate: {
-      isEmail: true,
+      is: {
+        args: [emailValidationPattern],
+        msg: emailValidationErrMessage,
+      },
     },
   },
   phone: {
@@ -31,9 +36,19 @@ const Contact = sequelize.define("contact", {
     type: DataTypes.BOOLEAN,
     defaultValue: false,
   },
+  owner: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+    references: {
+      model: "users",
+      key: "id",
+    },
+    onDelete: "RESTRICT",
+    onUpdate: "CASCADE",
+  },
 });
 
 // uncomment to sync if the model above was updated
-// Contact.sync({ alter: true });
+// Contact.sync({ force: true });
 
 export default Contact;

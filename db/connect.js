@@ -1,4 +1,5 @@
 import sequelize from "./sequelize.js";
+import "./associations.js";
 
 async function connectDatabase() {
   try {
