@@ -43,12 +43,12 @@ const Contact = sequelize.define("contact", {
       model: "users",
       key: "id",
     },
-    onDelete: "RESTRICT",
+    onDelete: "CASCADE",
     onUpdate: "CASCADE",
   },
 });
 
 // uncomment to sync if the model above was updated
-// Contact.sync({ force: true });
+// Contact.sync({ alter: true });
 
 export default Contact;
