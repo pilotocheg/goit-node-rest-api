@@ -33,9 +33,10 @@ const User = sequelize.define("user", {
     type: DataTypes.STRING,
     defaultValue: null,
   },
+  avatarURL: DataTypes.STRING,
 });
 
 // uncomment to sync if the model above was updated
-// User.sync({ force: true });
+// User.sync({ alter: true });
 
 export default User;
