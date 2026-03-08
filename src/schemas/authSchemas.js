@@ -8,3 +8,7 @@ export const userCredentialsSchema = Joi.object({
     "string.min": "Password must be at least 6 characters",
   }),
 });
+
+export const emailSchema = Joi.object({
+  email: email().required(),
+});

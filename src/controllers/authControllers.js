@@ -7,6 +7,26 @@ export const registerUser = async (req, res) => {
   res.status(201).json(result);
 };
 
+export const verifyUser = async (req, res) => {
+  const { verificationToken } = req.params;
+
+  await authServices.verifyUser(verificationToken);
+
+  res.json({
+    message: "Verification successful",
+  });
+};
+
+export const resendVerificationEmail = async (req, res) => {
+  const { email } = req.body;
+
+  await authServices.resendVerificationEmail(email);
+
+  res.json({
+    message: "Verification email sent",
+  });
+};
+
 export const loginUser = async (req, res) => {
   const result = await authServices.loginUser(req.body);
 
